@@ -501,8 +501,10 @@ extension LightboxController: HeaderViewDelegate {
   
   @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
     if let error = error {
+        UIAlertView.init(title:"Error!" , message: error.localizedDescription, delegate: nil, cancelButtonTitle: "OK").show()
       downloadFailDelegate?.lightboxControllerDownloadFail(self, error: error)
     } else {
+        UIAlertView.init(title: "Saved!", message: "", delegate: nil, cancelButtonTitle: "OK").show()
       downloadSuccessDelegate?.lightboxControllerDownloadSuccess(self)
     }
   }

@@ -3,8 +3,9 @@ import Hue
 import AVKit
 import AVFoundation
 import Imaginary
+import IoniconsKit
 
-public class LightboxConfig {
+public class LightboxConfig:NSObject {
   /// Whether to show status bar while Lightbox is presented
   public static var hideStatusBar = true
   
@@ -42,11 +43,11 @@ public class LightboxConfig {
   
   public struct PageIndicator {
     public static var enabled = true
-    public static var separatorColor = UIColor(hex: "3D4757")
+    public static var separatorColor = UIColor(hex: "757A4E")
     
     public static var textAttributes: [NSAttributedStringKey: Any] = [
-      .font: UIFont.systemFont(ofSize: 12),
-      .foregroundColor: UIColor(hex: "899AB8"),
+      .font: UIFont.boldSystemFont(ofSize: 14),
+      .foregroundColor: UIColor(hex: "757A4E"),
       .paragraphStyle: {
         var style = NSMutableParagraphStyle()
         style.alignment = .center
@@ -56,15 +57,15 @@ public class LightboxConfig {
   }
   
   public struct CloseButton {
-    public static var enabled = true
+    public static var enabled = false
     public static var size: CGSize?
     public static var text = NSLocalizedString("Close", comment: "")
     public static var image: UIImage?
     public static var position = HeaderViewChildPosition.start
     
     public static var textAttributes: [NSAttributedStringKey: Any] = [
-      .font: UIFont.boldSystemFont(ofSize: 16),
-      .foregroundColor: UIColor.white,
+      .font: UIFont.boldSystemFont(ofSize: 14),
+      .foregroundColor: UIColor(hex: "757A4E"),
       .paragraphStyle: {
         var style = NSMutableParagraphStyle()
         style.alignment = .center
@@ -76,13 +77,14 @@ public class LightboxConfig {
   public struct DownloadButton {
     public static var enabled = true
     public static var size: CGSize?
-    public static var text = NSLocalizedString("Download", comment: "")
+    
+    public static var text = String.ionicon(with: .iosDownloadOutline)
     public static var image: UIImage?
     public static var position = HeaderViewChildPosition.end
     
     public static var textAttributes: [NSAttributedStringKey: Any] = [
-      .font: UIFont.boldSystemFont(ofSize: 16),
-      .foregroundColor: UIColor.white,
+      .font: UIFont.boldSystemFont(ofSize: 14),
+      .foregroundColor: UIColor(hex: "757A4E"),
       .paragraphStyle: {
         var style = NSMutableParagraphStyle()
         style.alignment = .center
@@ -113,10 +115,10 @@ public class LightboxConfig {
     public static var enabled = true
     public static var textColor = UIColor.white
     public static var ellipsisText = NSLocalizedString("Show more", comment: "")
-    public static var ellipsisColor = UIColor(hex: "899AB9")
+    public static var ellipsisColor = UIColor(hex: "757A4E")
     
     public static var textAttributes: [NSAttributedStringKey: Any] = [
-      .font: UIFont.systemFont(ofSize: 12),
+      .font: UIFont.boldSystemFont(ofSize: 14),
       .foregroundColor: UIColor(hex: "DBDBDB")
     ]
   }

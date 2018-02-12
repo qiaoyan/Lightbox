@@ -1,7 +1,7 @@
 import UIKit
 import Imaginary
 
-open class LightboxImage {
+open class LightboxImage:NSObject {
 
   open fileprivate(set) var image: UIImage?
   open fileprivate(set) var imageURL: URL?

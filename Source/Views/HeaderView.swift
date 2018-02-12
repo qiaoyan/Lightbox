@@ -16,7 +16,7 @@ open class HeaderView: UIView {
   open fileprivate(set) lazy var closeButton: UIButton = { [unowned self] in
     let title = NSAttributedString(
       string: LightboxConfig.CloseButton.text,
-      attributes: LightboxConfig.CloseButton.textAttributes)
+      attributes: LightboxConfig.CloseButton.textAttributes as [NSAttributedStringKey : Any] as [String : Any])
     
     let button = UIButton(type: .system)
     
@@ -43,7 +43,7 @@ open class HeaderView: UIView {
   open fileprivate(set) lazy var downloadButton: UIButton = { [unowned self] in
     let title = NSAttributedString(
       string: LightboxConfig.DownloadButton.text,
-      attributes: LightboxConfig.DownloadButton.textAttributes)
+      attributes: LightboxConfig.DownloadButton.textAttributes as [NSAttributedStringKey : Any] as [String : Any])
     
     let button = UIButton(type: .system)
     
@@ -83,7 +83,7 @@ open class HeaderView: UIView {
   open fileprivate(set) lazy var deleteButton: UIButton = { [unowned self] in
     let title = NSAttributedString(
       string: LightboxConfig.DeleteButton.text,
-      attributes: LightboxConfig.DeleteButton.textAttributes)
+      attributes: LightboxConfig.DeleteButton.textAttributes as [NSAttributedStringKey : Any] as [String : Any])
     
     let button = UIButton(type: .system)
     
