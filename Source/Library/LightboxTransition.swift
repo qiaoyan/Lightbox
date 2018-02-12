@@ -10,7 +10,7 @@ class LightboxTransition: UIPercentDrivenInteractiveTransition {
     return gesture
     }()
 
-  var interactive = true
+  var interactive = false
   var dismissing = false
   var initialOrigin = CGPoint(x: 0, y: 0)
 
