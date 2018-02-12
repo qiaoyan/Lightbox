@@ -17,7 +17,7 @@ open class LightboxImage:NSObject {
     self.videoURL = videoURL
   }
   
-  public init(imageURL: URL, text: String = "", videoURL: URL? = nil) {
+  @objc public init(imageURL: URL, text: String = "", videoURL: URL? = nil) {
     self.imageURL = imageURL
     self.text = text
     self.videoURL = videoURL

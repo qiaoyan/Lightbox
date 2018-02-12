@@ -116,7 +116,7 @@ open class LightboxController: UIViewController {
     return pageViews.count
   }
 
-  open var dynamicBackground: Bool = false {
+  @objc open var dynamicBackground: Bool = false {
     didSet {
       if dynamicBackground == true {
         effectView.frame = view.frame
@@ -165,7 +165,7 @@ open class LightboxController: UIViewController {
   
   // MARK: - Initializers
 
-  public init(images: [LightboxImage] = [], startIndex index: Int = 0) {
+  @objc public init(images: [LightboxImage] = [], startIndex index: Int = 0) {
     self.initialImages = images
     self.initialPage = index
     super.init(nibName: nil, bundle: nil)

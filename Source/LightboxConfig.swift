@@ -4,8 +4,11 @@ import AVKit
 import AVFoundation
 import Imaginary
 import IoniconsKit
+import UIKit
+
 
 public class LightboxConfig:NSObject {
+    
   /// Whether to show status bar while Lightbox is presented
   public static var hideStatusBar = true
   
@@ -23,7 +26,7 @@ public class LightboxConfig:NSObject {
   }
   
   /// How to load image onto UIImageView
-  public static var loadImage: (UIImageView, URL, ((UIImage?) -> Void)?) -> Void = { (imageView, imageURL, completion) in
+  @objc public static var loadImage: (UIImageView, URL, ((UIImage?) -> Void)?) -> Void = { (imageView, imageURL, completion) in
     
     // Use Imaginary by default
     imageView.setImage(url: imageURL, placeholder: nil, completion: { result in
@@ -37,7 +40,7 @@ public class LightboxConfig:NSObject {
   }
   
   /// Indicator is used to show while image is being fetched
-  public static var makeLoadingIndicator: () -> UIView = {
+  @objc public static var makeLoadingIndicator: () -> UIView = {
     return LoadingIndicator()
   }
   
@@ -83,13 +86,21 @@ public class LightboxConfig:NSObject {
     public static var position = HeaderViewChildPosition.end
     
     public static var textAttributes: [NSAttributedStringKey: Any] = [
-      .font: UIFont.boldSystemFont(ofSize: 14),
+      .font: UIFont.ionicon(of: 36),
       .foregroundColor: UIColor(hex: "757A4E"),
+//      .shadow:{
+//        let attributedStringShadow = NSShadow()
+//        attributedStringShadow.shadowOffset = CGSize(width: 0, height: 1)
+//        attributedStringShadow.shadowBlurRadius = 1.0
+//        attributedStringShadow.shadowColor = UIColor(hex: "4D4B50")
+//        return attributedStringShadow
+//      }(),
       .paragraphStyle: {
         var style = NSMutableParagraphStyle()
         style.alignment = .center
         return style
-      }()
+      }(
+        )
     ]
   }
   
