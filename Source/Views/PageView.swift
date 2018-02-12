@@ -1,4 +1,5 @@
 import UIKit
+import IoniconsKit
 
 protocol PageViewDelegate: class {
 
@@ -21,8 +22,8 @@ class PageView: UIScrollView {
 
   lazy var playButton: UIButton = {
     let button = UIButton(type: .custom)
-    button.frame.size = CGSize(width: 60, height: 60)
-    button.setBackgroundImage(AssetManager.image("lightbox_play"), for: UIControlState())
+    button.frame.size = CGSize(width: 88, height: 88)
+    button.setBackgroundImage(UIImage.ionicon(with:.iosPlay , textColor: UIColor(hex: "757A4E"), size: CGSize(width:66, height:66), backgroundColor: UIColor.clear), for: UIControlState())
     button.addTarget(self, action: #selector(playButtonTouched(_:)), for: .touchUpInside)
 
     button.layer.shadowOffset = CGSize(width: 1, height: 1)

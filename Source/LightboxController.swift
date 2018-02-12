@@ -208,7 +208,7 @@ open class LightboxController: UIViewController {
     super.viewDidLayoutSubviews()
 
     // 15 % of the view's height, so the header and footer have a proper height in both portrait and landscape orientations.
-    let height = view.bounds.height * 0.15
+    let height = view.bounds.height * 0.15 > 77 ? view.bounds.height * 0.15 : 77
     
     scrollView.frame = view.bounds
     footerView.frame.size = CGSize(
@@ -229,12 +229,24 @@ open class LightboxController: UIViewController {
       yHeader = 16
     }
     
-    headerView.frame = CGRect(
-      x: 0,
-      y: yHeader,
-      width: view.bounds.width,
-      height: height
-    )
+    if #available(iOS 11.0, *) {
+        
+        headerView.frame = CGRect(
+            x: 0,
+            y: yHeader,
+            width: view.bounds.width,
+            height: CGFloat(48) + view.safeAreaInsets.top
+        )
+    } else {
+        // Fallback on earlier versions
+        headerView.frame = CGRect(
+            x: 0,
+            y: yHeader,
+            width: view.bounds.width,
+            height: CGFloat(48) + UIApplication.shared.statusBarFrame.maxY
+            
+        )
+    }
   }
 
   open override var prefersStatusBarHidden: Bool {

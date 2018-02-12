@@ -141,7 +141,7 @@ public class LightboxConfig:NSObject {
   
   public struct Header {
     public static var displayGradient = true
-    public static var topPadding: CGFloat = 0
+    public static var topPadding: CGFloat = -2
     public static var gradientColors = [UIColor(hex: "040404"), UIColor(hex: "040404").alpha(0.0)]
   }
   
