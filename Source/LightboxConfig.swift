@@ -10,8 +10,8 @@ import UIKit
 public class LightboxConfig:NSObject {
     
   /// Whether to show status bar while Lightbox is presented
+  @objc public static var defaultFontSize = CGFloat(16)
   public static var hideStatusBar = true
-  
   public static var hideControlsInZoom = true
   public static var toggleControlsOnTouchWhenZoomed = false
   
@@ -49,7 +49,7 @@ public class LightboxConfig:NSObject {
     public static var separatorColor = UIColor(hex: "757A4E")
     
     public static var textAttributes: [NSAttributedStringKey: Any] = [
-      .font: UIFont.boldSystemFont(ofSize: 14),
+      .font: UIFont.boldSystemFont(ofSize: defaultFontSize-2),
       .foregroundColor: UIColor(hex: "757A4E"),
       .paragraphStyle: {
         var style = NSMutableParagraphStyle()
@@ -67,7 +67,7 @@ public class LightboxConfig:NSObject {
     public static var position = HeaderViewChildPosition.start
     
     public static var textAttributes: [NSAttributedStringKey: Any] = [
-      .font: UIFont.boldSystemFont(ofSize: 14),
+      .font: UIFont.boldSystemFont(ofSize: defaultFontSize-2),
       .foregroundColor: UIColor(hex: "757A4E"),
       .paragraphStyle: {
         var style = NSMutableParagraphStyle()
@@ -112,7 +112,7 @@ public class LightboxConfig:NSObject {
     public static var position = HeaderViewChildPosition.center
     
     public static var textAttributes: [NSAttributedStringKey: Any] = [
-      .font: UIFont.boldSystemFont(ofSize: 16),
+      .font: UIFont.boldSystemFont(ofSize: defaultFontSize-2),
       .foregroundColor: UIColor(hex: "FA2F5B"),
       .paragraphStyle: {
         var style = NSMutableParagraphStyle()
@@ -129,7 +129,7 @@ public class LightboxConfig:NSObject {
     public static var ellipsisColor = UIColor(hex: "757A4E")
     
     public static var textAttributes: [NSAttributedStringKey: Any] = [
-      .font: UIFont.boldSystemFont(ofSize: 14),
+      .font: UIFont.boldSystemFont(ofSize: defaultFontSize),
       .foregroundColor: UIColor(hex: "DBDBDB")
     ]
   }
@@ -142,7 +142,7 @@ public class LightboxConfig:NSObject {
   public struct Header {
     public static var displayGradient = true
     public static var topPadding: CGFloat = -2
-    public static var gradientColors = [UIColor(hex: "040404"), UIColor(hex: "040404").alpha(0.0)]
+    public static var gradientColors = [UIColor(hex: "040404"), UIColor(hex: "040404").alpha(0.02)]
   }
   
   public struct Footer {

@@ -180,7 +180,7 @@ extension HeaderView: LayoutConfigurable {
       y: topPadding
     )
     
-    activityIndicator.frame.origin = downloadButton.frame.origin
+    activityIndicator.center = downloadButton.center
     
     deleteButton.frame.origin = CGPoint(
       x: getX(position: LightboxConfig.DeleteButton.position, buttonWidth: deleteButton.frame.width),
