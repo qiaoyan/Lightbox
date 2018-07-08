@@ -3,15 +3,15 @@ import Imaginary
 
 open class LightboxImage:NSObject {
 
-  open fileprivate(set) var image: UIImage?
-  open fileprivate(set) var imageURL: URL?
-  open fileprivate(set) var imageDownloadURL: URL?
-  open fileprivate(set) var videoURL: URL?
-  open var text: String
+  @objc open fileprivate(set) var image: UIImage?
+  @objc open fileprivate(set) var imageURL: URL?
+  @objc open fileprivate(set) var imageDownloadURL: URL?
+  @objc open fileprivate(set) var videoURL: URL?
+  @objc open var text: String
   
   // MARK: - Initialization
   
-  public init(image: UIImage, text: String = "", videoURL: URL? = nil) {
+  @objc public init(image: UIImage, text: String = "", videoURL: URL? = nil) {
     self.image = image
     self.text = text
     self.videoURL = videoURL

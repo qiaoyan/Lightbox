@@ -11,6 +11,8 @@ public class LightboxConfig:NSObject {
     
   /// Whether to show status bar while Lightbox is presented
   @objc public static var defaultFontSize = CGFloat(16)
+  @objc public static var defaultTintColor = UIColor.white
+
   public static var hideStatusBar = true
   public static var hideControlsInZoom = true
   public static var toggleControlsOnTouchWhenZoomed = false
@@ -46,11 +48,11 @@ public class LightboxConfig:NSObject {
   
   public struct PageIndicator {
     public static var enabled = true
-    public static var separatorColor = UIColor(hex: "757A4E")
+    public static var separatorColor = defaultTintColor
     
     public static var textAttributes: [NSAttributedStringKey: Any] = [
       .font: UIFont.boldSystemFont(ofSize: defaultFontSize-2),
-      .foregroundColor: UIColor(hex: "757A4E"),
+      .foregroundColor: defaultTintColor,
       .paragraphStyle: {
         var style = NSMutableParagraphStyle()
         style.alignment = .center
@@ -68,7 +70,7 @@ public class LightboxConfig:NSObject {
     
     public static var textAttributes: [NSAttributedStringKey: Any] = [
       .font: UIFont.boldSystemFont(ofSize: defaultFontSize-2),
-      .foregroundColor: UIColor(hex: "757A4E"),
+      .foregroundColor: defaultTintColor,
       .paragraphStyle: {
         var style = NSMutableParagraphStyle()
         style.alignment = .center
@@ -87,7 +89,7 @@ public class LightboxConfig:NSObject {
     
     public static var textAttributes: [NSAttributedStringKey: Any] = [
       .font: UIFont.ionicon(of: 36),
-      .foregroundColor: UIColor(hex: "757A4E"),
+      .foregroundColor: defaultTintColor,
 //      .shadow:{
 //        let attributedStringShadow = NSShadow()
 //        attributedStringShadow.shadowOffset = CGSize(width: 0, height: 1)
@@ -113,7 +115,7 @@ public class LightboxConfig:NSObject {
     
     public static var textAttributes: [NSAttributedStringKey: Any] = [
       .font: UIFont.boldSystemFont(ofSize: defaultFontSize-2),
-      .foregroundColor: UIColor(hex: "FA2F5B"),
+      .foregroundColor: defaultTintColor,
       .paragraphStyle: {
         var style = NSMutableParagraphStyle()
         style.alignment = .center
@@ -126,11 +128,11 @@ public class LightboxConfig:NSObject {
     public static var enabled = true
     public static var textColor = UIColor.white
     public static var ellipsisText = NSLocalizedString("Show more", comment: "")
-    public static var ellipsisColor = UIColor(hex: "757A4E")
+    public static var ellipsisColor = UIColor(hex: "F7F2F2")
     
     public static var textAttributes: [NSAttributedStringKey: Any] = [
       .font: UIFont.boldSystemFont(ofSize: defaultFontSize),
-      .foregroundColor: UIColor(hex: "DBDBDB")
+      .foregroundColor: defaultTintColor
     ]
   }
   
