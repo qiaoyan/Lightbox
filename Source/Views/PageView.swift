@@ -22,12 +22,12 @@ class PageView: UIScrollView {
 
   lazy var playButton: UIButton = {
     let button = UIButton(type: .custom)
-    button.frame.size = CGSize(width: 88, height: 88)
-    button.setBackgroundImage(UIImage.ionicon(with:.iosPlay , textColor: UIColor(hex: "757A4E"), size: CGSize(width:66, height:66), backgroundColor: UIColor.clear), for: UIControlState())
+    button.frame.size = CGSize(width: 66, height: 66)
+    button.setBackgroundImage(UIImage.ionicon(with:.play , textColor: LightboxConfig.defaultTintColor, size: CGSize(width:66, height:66), backgroundColor: UIColor.clear), for: UIControlState())
     button.addTarget(self, action: #selector(playButtonTouched(_:)), for: .touchUpInside)
 
-    button.layer.shadowOffset = CGSize(width: 1, height: 1)
-    button.layer.shadowColor = UIColor.gray.cgColor
+    button.layer.shadowOffset = CGSize(width: 2, height: 2)
+    button.layer.shadowColor = LightboxConfig.defaultTintColor.cgColor
     button.layer.masksToBounds = false
     button.layer.shadowOpacity = 0.8
 
