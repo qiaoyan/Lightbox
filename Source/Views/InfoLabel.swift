@@ -17,7 +17,7 @@ open class InfoLabel: UILabel {
   open var numberOfVisibleLines = 2
 
   var ellipsis: String {
-    return "... \(LightboxConfig.InfoLabel.ellipsisText)"
+    return " ... \(LightboxConfig.InfoLabel.ellipsisText)"
   }
 
   open weak var delegate: InfoLabelDelegate?
