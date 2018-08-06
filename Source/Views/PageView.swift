@@ -22,7 +22,7 @@ class PageView: UIScrollView {
 
   lazy var playButton: UIButton = {
     let button = UIButton(type: .custom)
-    button.frame.size = CGSize(width: 66, height: 66)
+    button.frame.size = CGSize(width: 88, height: 88)
     button.setBackgroundImage(UIImage.ionicon(with:.play , textColor: LightboxConfig.defaultTintColor, size: CGSize(width:66, height:66), backgroundColor: UIColor.clear), for: UIControlState())
     button.addTarget(self, action: #selector(playButtonTouched(_:)), for: .touchUpInside)
 
