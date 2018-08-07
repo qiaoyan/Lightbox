@@ -128,10 +128,10 @@ public class LightboxConfig:NSObject {
     public static var enabled = true
     public static var textColor = UIColor.white
     public static var ellipsisText = NSLocalizedString("Show more", comment: "")
-    public static var ellipsisColor = UIColor(hex: "F7F2F2")
+    public static var ellipsisColor = UIColor(hex: "F2F2F2")
     
     public static var textAttributes: [NSAttributedStringKey: Any] = [
-      .font: UIFont.boldSystemFont(ofSize: defaultFontSize),
+      .font: UIFont.boldSystemFont(ofSize: defaultFontSize-2),
       .foregroundColor: defaultTintColor
     ]
   }
