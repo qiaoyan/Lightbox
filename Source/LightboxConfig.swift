@@ -131,7 +131,7 @@ public class LightboxConfig:NSObject {
     public static var ellipsisColor = defaultTintColor
     
     public static var textAttributes: [NSAttributedStringKey: Any] = [
-      .font: UIFont.boldSystemFont(ofSize: defaultFontSize-2),
+      .font: UIFont.boldSystemFont(ofSize: defaultFontSize),
       .foregroundColor: UIColor(hex: "F2F2F2")
     ]
   }
