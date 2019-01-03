@@ -1,19 +1,15 @@
 import UIKit
-import Hue
 import AVKit
 import AVFoundation
 import Imaginary
 import IoniconsKit
-import UIKit
 
-
-public class LightboxConfig:NSObject {
-    
+@objc public class LightboxConfig:NSObject {
   /// Whether to show status bar while Lightbox is presented
   @objc public static var defaultFontSize = CGFloat(16)
   @objc public static var defaultTintColor = UIColor.white
-
   public static var hideStatusBar = true
+  
   public static var hideControlsInZoom = true
   public static var toggleControlsOnTouchWhenZoomed = false
   
@@ -45,13 +41,18 @@ public class LightboxConfig:NSObject {
   @objc public static var makeLoadingIndicator: () -> UIView = {
     return LoadingIndicator()
   }
-  
+
+  /// Number of images to preload.
+  ///
+  /// 0 - Preload all images (default).
+  public static var preload = 3
+
   public struct PageIndicator {
     public static var enabled = true
     public static var separatorColor = defaultTintColor
     
-    public static var textAttributes: [NSAttributedStringKey: Any] = [
-      .font: UIFont.boldSystemFont(ofSize: defaultFontSize-2),
+    public static var textAttributes: [NSAttributedString.Key: Any] = [
+      .font: UIFont.systemFont(ofSize: defaultFontSize-4),
       .foregroundColor: defaultTintColor,
       .paragraphStyle: {
         var style = NSMutableParagraphStyle()
@@ -62,14 +63,16 @@ public class LightboxConfig:NSObject {
   }
   
   public struct CloseButton {
-    public static var enabled = false
+    public static var enabled = true
     public static var size: CGSize?
-    public static var text = NSLocalizedString("Close", comment: "")
+//    public static var text = NSLocalizedString("Close", comment: "")
+    public static var text = String.ionicon(with: .iosCloseOutline)
     public static var image: UIImage?
     public static var position = HeaderViewChildPosition.start
     
-    public static var textAttributes: [NSAttributedStringKey: Any] = [
-      .font: UIFont.boldSystemFont(ofSize: defaultFontSize-2),
+    public static var textAttributes: [NSAttributedString.Key: Any] = [
+//      .font: UIFont.boldSystemFont(ofSize: defaultFontSize-2),
+      .font: UIFont.ionicon(of: 36),
       .foregroundColor: defaultTintColor,
       .paragraphStyle: {
         var style = NSMutableParagraphStyle()
@@ -82,27 +85,20 @@ public class LightboxConfig:NSObject {
   public struct DownloadButton {
     public static var enabled = true
     public static var size: CGSize?
-    
+//        public static var text = NSLocalizedString("Download", comment: "")
+
     public static var text = String.ionicon(with: .iosDownloadOutline)
     public static var image: UIImage?
     public static var position = HeaderViewChildPosition.end
     
-    public static var textAttributes: [NSAttributedStringKey: Any] = [
+    public static var textAttributes: [NSAttributedString.Key: Any] = [
       .font: UIFont.ionicon(of: 36),
       .foregroundColor: defaultTintColor,
-//      .shadow:{
-//        let attributedStringShadow = NSShadow()
-//        attributedStringShadow.shadowOffset = CGSize(width: 0, height: 1)
-//        attributedStringShadow.shadowBlurRadius = 1.0
-//        attributedStringShadow.shadowColor = UIColor(hex: "4D4B50")
-//        return attributedStringShadow
-//      }(),
       .paragraphStyle: {
         var style = NSMutableParagraphStyle()
         style.alignment = .center
         return style
-      }(
-        )
+      }()
     ]
   }
   
@@ -113,7 +109,7 @@ public class LightboxConfig:NSObject {
     public static var image: UIImage?
     public static var position = HeaderViewChildPosition.center
     
-    public static var textAttributes: [NSAttributedStringKey: Any] = [
+    public static var textAttributes: [NSAttributedString.Key: Any] = [
       .font: UIFont.boldSystemFont(ofSize: defaultFontSize-2),
       .foregroundColor: defaultTintColor,
       .paragraphStyle: {
@@ -130,7 +126,7 @@ public class LightboxConfig:NSObject {
     public static var ellipsisText = NSLocalizedString("Show more", comment: "")
     public static var ellipsisColor = defaultTintColor
     
-    public static var textAttributes: [NSAttributedStringKey: Any] = [
+    public static var textAttributes: [NSAttributedString.Key: Any] = [
       .font: UIFont.boldSystemFont(ofSize: defaultFontSize),
       .foregroundColor: UIColor(hex: "F2F2F2")
     ]
@@ -142,14 +138,14 @@ public class LightboxConfig:NSObject {
   }
   
   public struct Header {
-    public static var displayGradient = true
-    public static var topPadding: CGFloat = -2
-    public static var gradientColors = [UIColor(hex: "040404"), UIColor(hex: "040404").alpha(0.02)]
+    public static var displayGradient = false
+    public static var topPadding: CGFloat = 0
+    public static var gradientColors = [UIColor(hex: "040404"), UIColor(hex: "040404").withAlphaComponent(0.1)]
   }
   
   public struct Footer {
     public static var bottomPadding: CGFloat = 0
-    public static var gradientColors = [UIColor(hex: "040404").alpha(0.1), UIColor(hex: "040404")]
+    public static var gradientColors = [UIColor(hex: "040404").withAlphaComponent(0.1), UIColor(hex: "040404")]
   }
 }
 

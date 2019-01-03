@@ -16,12 +16,12 @@ open class HeaderView: UIView {
   open fileprivate(set) lazy var closeButton: UIButton = { [unowned self] in
     let title = NSAttributedString(
       string: LightboxConfig.CloseButton.text,
-      attributes: LightboxConfig.CloseButton.textAttributes as [NSAttributedStringKey : Any])
+      attributes: LightboxConfig.CloseButton.textAttributes)
     
     let button = UIButton(type: .system)
-    
-    button.setAttributedTitle(title, for: UIControlState())
-    
+
+    button.setAttributedTitle(title, for: UIControl.State())
+
     if let size = LightboxConfig.CloseButton.size {
       button.frame.size = size
     } else {
@@ -32,7 +32,7 @@ open class HeaderView: UIView {
                      for: .touchUpInside)
     
     if let image = LightboxConfig.CloseButton.image {
-      button.setBackgroundImage(image, for: UIControlState())
+        button.setBackgroundImage(image, for: UIControl.State())
     }
     
     button.isHidden = !LightboxConfig.CloseButton.enabled
@@ -43,11 +43,11 @@ open class HeaderView: UIView {
   open fileprivate(set) lazy var downloadButton: UIButton = { [unowned self] in
     let title = NSAttributedString(
       string: LightboxConfig.DownloadButton.text,
-      attributes: LightboxConfig.DownloadButton.textAttributes as [NSAttributedStringKey : Any])
+      attributes: LightboxConfig.DownloadButton.textAttributes)
     
     let button = UIButton(type: .system)
     
-    button.setAttributedTitle(title, for: UIControlState())
+    button.setAttributedTitle(title, for: UIControl.State())
     
     if let size = LightboxConfig.DownloadButton.size {
       button.frame.size = size
@@ -58,7 +58,7 @@ open class HeaderView: UIView {
     button.addTarget(self, action: #selector(downloadButtonDidPress(_:)), for: .touchUpInside)
     
     if let image = LightboxConfig.DownloadButton.image {
-      button.setBackgroundImage(image, for: UIControlState())
+      button.setBackgroundImage(image, for: UIControl.State())
     }
     
     button.isHidden = !LightboxConfig.DownloadButton.enabled
@@ -67,7 +67,7 @@ open class HeaderView: UIView {
     }()
   
   open fileprivate(set) lazy var activityIndicator: UIActivityIndicatorView = { [unowned self] in
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+    let activityIndicator = UIActivityIndicatorView(style: .white)
     
     if let size = LightboxConfig.DownloadButton.size {
       activityIndicator.frame.size = size
@@ -83,7 +83,7 @@ open class HeaderView: UIView {
   open fileprivate(set) lazy var deleteButton: UIButton = { [unowned self] in
     let title = NSAttributedString(
       string: LightboxConfig.DeleteButton.text,
-      attributes: LightboxConfig.DeleteButton.textAttributes as [NSAttributedStringKey : Any])
+      attributes: LightboxConfig.DeleteButton.textAttributes)
     
     let button = UIButton(type: .system)
     
@@ -99,7 +99,7 @@ open class HeaderView: UIView {
                      for: .touchUpInside)
     
     if let image = LightboxConfig.DeleteButton.image {
-      button.setBackgroundImage(image, for: UIControlState())
+        button.setBackgroundImage(image, for: UIControl.State())
     }
     
     button.isHidden = !LightboxConfig.DeleteButton.enabled
@@ -180,7 +180,7 @@ extension HeaderView: LayoutConfigurable {
       y: topPadding
     )
     
-    activityIndicator.center = downloadButton.center
+    activityIndicator.frame.origin = downloadButton.frame.origin
     
     deleteButton.frame.origin = CGPoint(
       x: getX(position: LightboxConfig.DeleteButton.position, buttonWidth: deleteButton.frame.width),

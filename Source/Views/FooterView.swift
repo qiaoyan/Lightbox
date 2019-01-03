@@ -68,7 +68,7 @@ open class FooterView: UIView {
     let text = "\(page)/\(numberOfPages)"
     
     pageLabel.attributedText = NSAttributedString(string: text,
-                                                  attributes: LightboxConfig.PageIndicator.textAttributes as [NSAttributedStringKey : Any])
+                                                  attributes: LightboxConfig.PageIndicator.textAttributes)
     pageLabel.sizeToFit()
   }
   
@@ -120,7 +120,7 @@ extension FooterView: LayoutConfigurable {
     // Side padding depending on the layout orientation, iOS version (11 vs lower), and if it's iPhone X or not.
     let sidePadding = getTopOrigin().x
     
-    infoLabel.frame = CGRect(x:17+sidePadding, y: 0, width: frame.width - 2*(17+sidePadding), height: 35)
+    infoLabel.frame = CGRect(x: 17 + sidePadding, y: 0, width: frame.width - 17 * 2, height: 35)
     infoLabel.configureLayout()
   }
 }
