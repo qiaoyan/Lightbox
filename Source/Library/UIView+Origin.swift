@@ -41,9 +41,9 @@ extension UIView {
     }
     
     if orientation == .portrait || orientation == .portraitUpsideDown {
-      point.y += 32
-    } else {
       point.y += 16
+    } else {
+      point.y += 8
     }
     
     return point

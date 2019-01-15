@@ -168,8 +168,8 @@ open class HeaderView: UIView {
 extension HeaderView: LayoutConfigurable {
   
   @objc public func configureLayout() {
-    //    let topPadding = getTopOrigin().y + LightboxConfig.Header.topPadding
-    let topPadding = LightboxConfig.Header.topPadding
+    let topPadding = getTopOrigin().y + LightboxConfig.Header.topPadding
+//    let topPadding = LightboxConfig.Header.topPadding
     
     closeButton.frame.origin = CGPoint(
       x: getX(position: LightboxConfig.CloseButton.position, buttonWidth: closeButton.frame.width),
