@@ -3,9 +3,9 @@ import UIKit
 extension UIView {
   
   private func getSafeAreaInsets() -> UIEdgeInsets? {
-    if #available(iOS 11, *) {
-      return safeAreaInsets
-    }
+//    if #available(iOS 11, *) {
+//      return safeAreaInsets
+//    }
     
     return nil
   }
@@ -14,7 +14,7 @@ extension UIView {
     // The size of the iPhone status bar.
     let statusBarHeight: CGFloat = 20
     
-    var point = CGPoint(x: 0, y: 0)
+    var point = CGPoint(x: 8, y: 0)
     
     let orientation = UIApplication.shared.statusBarOrientation
     
@@ -41,9 +41,9 @@ extension UIView {
     }
     
     if orientation == .portrait || orientation == .portraitUpsideDown {
-      point.y += 16
-    } else {
       point.y += 8
+    } else {
+      point.y += 0
     }
     
     return point
