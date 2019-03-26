@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.ios.resource = 'Resources/Lightbox.bundle'
 
   s.frameworks = 'UIKit', 'AVFoundation', 'AVKit'
-  s.dependency 'Imaginary', '~> 4.0'
+  #s.dependency 'Imaginary', '~> 4.0'
   s.dependency 'IoniconsKit', '~> 1.1.0'
 
 
