@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
 
   s.frameworks = 'UIKit', 'AVFoundation', 'AVKit'
   #s.dependency 'Imaginary', '~> 4.0'
-  s.dependency 'IoniconsKit', '~> 1.1.0'
+  #s.dependency 'IoniconsKit', '~> 1.1.0'
 
 
   s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.2' }
