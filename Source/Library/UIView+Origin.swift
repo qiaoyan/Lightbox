@@ -3,9 +3,9 @@ import UIKit
 extension UIView {
   
   private func getSafeAreaInsets() -> UIEdgeInsets? {
-//    if #available(iOS 11, *) {
-//      return safeAreaInsets
-//    }
+    if #available(iOS 11, *) {
+      return UIApplication.shared.keyWindow?.safeAreaInsets
+    }
     
     return nil
   }
