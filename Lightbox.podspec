@@ -17,5 +17,4 @@ Pod::Spec.new do |s|
   s.dependency 'IoniconsKit', '~> 1.1.0'
 
 
-  s.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.2' }
 end
