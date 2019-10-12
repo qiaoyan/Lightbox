@@ -528,10 +528,18 @@ extension LightboxController: HeaderViewDelegate {
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
-            UIAlertView.init(title:"Error!" , message: error.localizedDescription, delegate: nil, cancelButtonTitle: "OK").show()
+            let alert = UIAlertController.init(title: "Error!", message: error.localizedDescription, preferredStyle: .alert)
+            alert.view.tintColor = LightboxConfig.defaultTintColor
+            alert.addAction(UIAlertAction.init(title: "OK", style: .cancel, handler: { (action) in
+            }))
+            self.show(alert, sender: image)
             downloadFailDelegate?.lightboxControllerDownloadFail(self, error: error)
         } else {
-            UIAlertView.init(title: "Saved!", message: "", delegate: nil, cancelButtonTitle: "OK").show()
+            let alert = UIAlertController.init(title: "Saved!", message: "", preferredStyle: .alert)
+            alert.view.tintColor = LightboxConfig.defaultTintColor
+            alert.addAction(UIAlertAction.init(title: "OK", style: .cancel, handler: { (action) in
+            }))
+            self.show(alert, sender: image)
             downloadSuccessDelegate?.lightboxControllerDownloadSuccess(self)
         }
     }
