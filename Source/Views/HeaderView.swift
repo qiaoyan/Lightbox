@@ -6,18 +6,12 @@ protocol HeaderViewDelegate: class {
   func headerView(_ headerView: HeaderView, didPressDownloadButton downloadButton: UIButton)
 }
 
-public enum HeaderViewChildPosition {
-  case start
-  case center
-  case end
-}
-
 open class HeaderView: UIView {
   open fileprivate(set) lazy var closeButton: UIButton = { [unowned self] in
     let title = NSAttributedString(
       string: LightboxConfig.CloseButton.text,
       attributes: LightboxConfig.CloseButton.textAttributes)
-    
+
     let button = UIButton(type: .system)
 
     button.setAttributedTitle(title, for: UIControl.State())
@@ -27,14 +21,14 @@ open class HeaderView: UIView {
     } else {
       button.sizeToFit()
     }
-    
+
     button.addTarget(self, action: #selector(closeButtonDidPress(_:)),
-                     for: .touchUpInside)
-    
+      for: .touchUpInside)
+
     if let image = LightboxConfig.CloseButton.image {
         button.setBackgroundImage(image, for: UIControl.State())
     }
-    
+
     button.isHidden = !LightboxConfig.CloseButton.enabled
     
     return button
@@ -84,63 +78,50 @@ open class HeaderView: UIView {
     let title = NSAttributedString(
       string: LightboxConfig.DeleteButton.text,
       attributes: LightboxConfig.DeleteButton.textAttributes)
-    
+
     let button = UIButton(type: .system)
-    
+
     button.setAttributedTitle(title, for: .normal)
-    
+
     if let size = LightboxConfig.DeleteButton.size {
       button.frame.size = size
     } else {
       button.sizeToFit()
     }
-    
+
     button.addTarget(self, action: #selector(deleteButtonDidPress(_:)),
-                     for: .touchUpInside)
-    
+      for: .touchUpInside)
+
     if let image = LightboxConfig.DeleteButton.image {
         button.setBackgroundImage(image, for: UIControl.State())
     }
-    
+
     button.isHidden = !LightboxConfig.DeleteButton.enabled
-    
+
     return button
-    }()
-  
-  let gradientColors = LightboxConfig.Header.gradientColors
+  }()
+
   weak var delegate: HeaderViewDelegate?
-  
+
   // MARK: - Initializers
-  
+
   public init() {
     super.init(frame: CGRect.zero)
-    
+
     backgroundColor = UIColor.clear
-    
-    if LightboxConfig.Header.displayGradient {
-      _ = addGradientLayer(gradientColors)
-    }
-    
     [closeButton, deleteButton, downloadButton, activityIndicator].forEach { addSubview($0) }
   }
-  
+
   public required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
-  open override func layoutSubviews() {
-    super.layoutSubviews()
-    
-    if LightboxConfig.Header.displayGradient {
-      resizeGradientLayer()
-    }
-  }
-  
+
   // MARK: - Actions
+
   @objc func deleteButtonDidPress(_ button: UIButton) {
     delegate?.headerView(self, didPressDeleteButton: button)
   }
-  
+
   @objc func closeButtonDidPress(_ button: UIButton) {
     delegate?.headerView(self, didPressCloseButton: button)
   }
@@ -166,41 +147,30 @@ open class HeaderView: UIView {
 // MARK: - LayoutConfigurable
 
 extension HeaderView: LayoutConfigurable {
-  
+
   @objc public func configureLayout() {
-    let topPadding = getTopOrigin().y + LightboxConfig.Header.topPadding
-//    let topPadding = LightboxConfig.Header.topPadding
-    
+    let topPadding: CGFloat
+
+    if #available(iOS 11, *) {
+      topPadding = safeAreaInsets.top
+    } else {
+      topPadding = 0
+    }
+
     closeButton.frame.origin = CGPoint(
-      x: getX(position: LightboxConfig.CloseButton.position, buttonWidth: closeButton.frame.width),
+        x: 17,
       y: topPadding
     )
     
     downloadButton.frame.origin = CGPoint(
-      x: getX(position: LightboxConfig.DownloadButton.position, buttonWidth: downloadButton.frame.width),
+      x: bounds.width - downloadButton.frame.width - 17,
       y: topPadding
     )
-    
     activityIndicator.frame.origin = downloadButton.frame.origin
-    
+
     deleteButton.frame.origin = CGPoint(
-      x: getX(position: LightboxConfig.DeleteButton.position, buttonWidth: deleteButton.frame.width),
+      x: 17,
       y: topPadding
     )
-  }
-  
-  fileprivate func getX(position: HeaderViewChildPosition, buttonWidth: CGFloat) -> CGFloat {
-    // Side padding depending on the layout orientation, iOS version (11 vs lower), and if it's iPhone X or not.
-    let sidePadding = getTopOrigin().x
-    
-    switch position {
-    case .start:
-      return 17 + sidePadding
-    case .center:
-      return (self.frame.width - buttonWidth) / 2
-    case .end:
-      return bounds.width - buttonWidth - 17 - sidePadding
-    }
   }
 }
-

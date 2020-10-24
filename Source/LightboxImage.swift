@@ -1,5 +1,5 @@
 import UIKit
-import Imaginary
+//import Imaginary
 
 @objc open class LightboxImage:NSObject {
 
@@ -9,7 +9,7 @@ import Imaginary
   open fileprivate(set) var videoURL: URL?
   open fileprivate(set) var imageClosure: (() -> UIImage)?
   open var text: String
-  
+
   // MARK: - Initialization
 
   internal init(text: String = "") {

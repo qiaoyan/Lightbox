@@ -1,5 +1,4 @@
 import UIKit
-import Imaginary
 
 public protocol LightboxControllerPageDelegate: class {
 
@@ -58,7 +57,7 @@ public protocol LightboxControllerDownloadFailDelegate: class {
   lazy var backgroundView: UIImageView = {
     let view = UIImageView()
     view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-    view.contentMode = .scaleAspectFill
+
     return view
   }()
 
@@ -163,8 +162,6 @@ public protocol LightboxControllerDownloadFailDelegate: class {
   fileprivate var initialImages: [LightboxImage]
   fileprivate let initialPage: Int
 
-  fileprivate var imageFetcher: ImageFetcher?
-  
   // MARK: - Initializers
 
   @objc public init(images: [LightboxImage] = [], startIndex index: Int = 0) {
@@ -182,6 +179,10 @@ public protocol LightboxControllerDownloadFailDelegate: class {
   open override func viewDidLoad() {
     super.viewDidLoad()
 
+    // 9 July 2020: @3lvis
+    // Lightbox hasn't been optimized to be used in presentation styles other than fullscreen.
+    modalPresentationStyle = .fullScreen
+    
     statusBarHidden = UIApplication.shared.isStatusBarHidden
 
     view.backgroundColor = UIColor.black
@@ -208,13 +209,10 @@ public protocol LightboxControllerDownloadFailDelegate: class {
   open override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
 
-    // 15 % of the view's height, so the header and footer have a proper height in both portrait and landscape orientations.
-    let height = view.bounds.height * 0.15
-    
     scrollView.frame = view.bounds
     footerView.frame.size = CGSize(
       width: view.bounds.width,
-      height: height
+      height: 100
     )
 
     footerView.frame.origin = CGPoint(
@@ -222,19 +220,11 @@ public protocol LightboxControllerDownloadFailDelegate: class {
       y: view.bounds.height - footerView.frame.height
     )
 
-    var yHeader: CGFloat
-    
-    if LightboxConfig.Header.displayGradient {
-      yHeader = LightboxConfig.hideStatusBar ? 0 : 16
-    } else {
-      yHeader = 16
-    }
-    
     headerView.frame = CGRect(
       x: 0,
-      y: yHeader,
+      y: 16,
       width: view.bounds.width,
-      height: height
+      height: 100
     )
   }
 
@@ -355,10 +345,7 @@ public protocol LightboxControllerDownloadFailDelegate: class {
     pageView?.playButton.isHidden = !visible
 
     UIView.animate(withDuration: duration, delay: delay, options: [], animations: {
-      if LightboxConfig.hideControlsInZoom {
-        self.headerView.alpha = alpha
-      }
-      
+      self.headerView.alpha = alpha
       self.footerView.alpha = alpha
       pageView?.playButton.alpha = alpha
     }, completion: nil)
@@ -435,7 +422,7 @@ extension LightboxController: PageViewDelegate {
   }
 
   func pageViewDidTouch(_ pageView: PageView) {
-    guard LightboxConfig.toggleControlsOnTouchWhenZoomed || (!LightboxConfig.toggleControlsOnTouchWhenZoomed && !pageView.hasZoomed) else { return }
+    guard !pageView.hasZoomed else { return }
 
     imageTouchDelegate?.lightboxController(self, didTouch: images[currentPage], at: currentPage)
 
@@ -484,7 +471,7 @@ extension LightboxController: HeaderViewDelegate {
   
   func headerView(_ headerView: HeaderView, didPressDownloadButton downloadButton: UIButton) {
     headerView.showActivityIndicator()
-    let option = Option()
+//    let option = Option()
     
     // Fetch the download URL image in case it has been provided, otherwise, use the preview image.
     if let url = self.initialImages[self.currentPage].videoURL {
@@ -533,6 +520,7 @@ extension LightboxController: HeaderViewDelegate {
             alert.addAction(UIAlertAction.init(title: "OK", style: .cancel, handler: { (action) in
             }))
             self.show(alert, sender: image)
+//            UIAlertView.init(title:"Error!" , message: error.localizedDescription, delegate: nil, cancelButtonTitle: "OK").show()
             downloadFailDelegate?.lightboxControllerDownloadFail(self, error: error)
         } else {
             let alert = UIAlertController.init(title: "Saved!", message: "", preferredStyle: .alert)
@@ -540,6 +528,7 @@ extension LightboxController: HeaderViewDelegate {
             alert.addAction(UIAlertAction.init(title: "OK", style: .cancel, handler: { (action) in
             }))
             self.show(alert, sender: image)
+//            UIAlertView.init(title: "Saved!", message: "", delegate: nil, cancelButtonTitle: "OK").show()
             downloadSuccessDelegate?.lightboxControllerDownloadSuccess(self)
         }
     }
